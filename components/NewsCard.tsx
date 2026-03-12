@@ -10,7 +10,6 @@ type Article = {
 
 type NewsCardProps = {
   article: Article;
-  onDebate: (topic: string) => void;
 };
 
 const borderBySport: Record<string, string> = {
@@ -31,7 +30,7 @@ function getSportKey(rawSport: string) {
   return "OTHER";
 }
 
-export default function NewsCard({ article, onDebate }: NewsCardProps) {
+export default function NewsCard({ article }: NewsCardProps) {
   const sportKey = getSportKey(article.sport);
   const borderColor = borderBySport[sportKey] ?? "#6b7280";
 
@@ -53,21 +52,13 @@ export default function NewsCard({ article, onDebate }: NewsCardProps) {
         <span className="text-xs text-white/60">{article.timeAgo}</span>
         {article.isHot ? (
           <span className="rounded-full bg-[var(--accent-red)]/20 px-2.5 py-1 text-xs font-bold text-[var(--accent-red)]">
-            🔥 HOT
+            HOT
           </span>
         ) : null}
       </div>
 
       <h2 className="mb-2 text-3xl leading-none text-white">{article.title}</h2>
-      <p className="mb-4 text-sm leading-relaxed text-white/80">{article.summary}</p>
-
-      <button
-        type="button"
-        onClick={() => onDebate(article.title)}
-        className="rounded-md bg-[var(--accent-blue)] px-4 py-2 text-sm font-bold text-white transition hover:brightness-110"
-      >
-        🎤 DEBATE THIS
-      </button>
+      <p className="text-sm leading-relaxed text-white/80">{article.summary}</p>
     </article>
   );
 }

@@ -1,13 +1,11 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import NewsCard from '@/components/NewsCard'
 
 const SPORT_FILTERS = ['All', 'NBA', 'NFL', 'MLB', 'NHL', 'Soccer', 'UFC', 'Boxing', 'Other']
 
 export default function HomePage() {
-  const router = useRouter()
   const [articles, setArticles] = useState([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState('All')
@@ -25,10 +23,6 @@ export default function HomePage() {
     } finally {
       setLoading(false)
     }
-  }
-
-  function handleDebate(topic: string) {
-    router.push(`/debate?topic=${encodeURIComponent(topic)}`)
   }
 
   const filtered = filter === 'All' ? articles : articles.filter((a: any) => a.sport === filter)
@@ -52,7 +46,7 @@ export default function HomePage() {
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16 }}>
             {filtered.map((article: any) => (
-              <NewsCard key={article.id} article={article} onDebate={handleDebate} />
+              <NewsCard key={article.id} article={article} />
             ))}
           </div>
         )}

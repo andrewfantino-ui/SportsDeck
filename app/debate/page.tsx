@@ -13,13 +13,24 @@ type ChatMessage = {
   timestamp: string;
 };
 
-const quickQuestions = [
-  "Who won the last Lakers vs Clippers game?",
-  "Is LeBron the GOAT?",
-  "Latest NFL injury reports",
-  "Best active soccer player?",
-  "Will the Yankees win the World Series?",
-  "Most dominant team in sports?"
+const QUICK_STARTERS = [
+  { text: "LeBron or Jordan — who is the real GOAT?", emoji: "🏀" },
+  { text: "Messi vs Ronaldo — settle it once and for all", emoji: "⚽" },
+  {
+    text: "Is Tom Brady the greatest athlete in American sports history?",
+    emoji: "🏈"
+  },
+  {
+    text: "Are the New York Yankees still the most dominant franchise in baseball?",
+    emoji: "⚾"
+  },
+  { text: "Should college athletes be paid?", emoji: "🎓" },
+  { text: "Is the NFL too dangerous to keep playing?", emoji: "🏈" },
+  {
+    text: "Who is the greatest boxer of all time — Ali, Tyson, or Canelo?",
+    emoji: "🥊"
+  },
+  { text: "Is Conor McGregor still relevant in UFC?", emoji: "🥊" }
 ];
 
 const stanceOptions: { value: Stance; label: string; description: string }[] = [
@@ -224,16 +235,16 @@ function DebatePageContent() {
             </div>
 
             <div className="mt-8">
-              <h2 className="text-3xl leading-none">Quick Questions</h2>
+              <h2 className="text-3xl leading-none">🔥 POPULAR DEBATE TOPICS</h2>
               <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                {quickQuestions.map((question) => (
+                {QUICK_STARTERS.map((starter) => (
                   <button
-                    key={question}
+                    key={starter.text}
                     type="button"
-                    onClick={() => void startWithQuickQuestion(question)}
+                    onClick={() => void startWithQuickQuestion(starter.text)}
                     className="rounded-md border border-white/10 bg-black/25 px-3 py-3 text-left text-sm text-white/90 transition hover:border-[var(--accent-blue)] hover:bg-black/40"
                   >
-                    {question}
+                    {starter.emoji} {starter.text}
                   </button>
                 ))}
               </div>
